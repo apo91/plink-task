@@ -1,10 +1,10 @@
 // @flow
 import React, { Component } from 'react';
 import QRCode from 'qrcode.react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 // import _ from '../../resources/4k-gaming-wallpaper-.png';
 import styles from './Auth.css';
-import routes from '../constants/routes.json';
+// import routes from '../constants/routes.json';
 
 type Props = {
   // increment: () => void,
@@ -27,22 +27,25 @@ export default class Auth extends Component<Props> {
     // } = this.props;
     return (
       <div className={styles.container}>
-        <Link to={routes.HOME}>
-          <i className="fa fa-arrow-left fa-3x" />
-        </Link>
+        <div className={styles.spacer1} />
         <Logo />
+        <div className={styles.spacer1} />
         <h2>Приветствуем, Plinker!</h2>
-        <h3>Отсканируйте QR-код через мобильное приложение</h3>
+        <p>Отсканируйте QR-код через мобильное приложение</p>
+        <div className={styles.spacer1} />
         <div className={styles.qrContainer}>
           <QRCode
             value="http://facebook.github.io/react/"
             renderAs="canvas"
-            size={168}
+            size={140}
           />
         </div>
-        <div>Как присоединить новое устройство?</div>
+        <div className={styles.spacer1} />
+        <a href="#">Как присоединить новое устройство?</a>
+        <div className={styles.spacer2} />
         <div>Не можете отсканировать код?</div>
-        <div>Попробуйте другой способ</div>
+        <a href="#">Попробуйте другой способ</a>
+        <div className={styles.spacer1} />
       </div>
     );
   }
