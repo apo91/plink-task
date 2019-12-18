@@ -10,7 +10,7 @@
  *
  * @flow
  */
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, Menu } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 
@@ -53,7 +53,7 @@ const createWindow = async () => {
   ) {
     await installExtensions();
   }
-
+  Menu.setApplicationMenu(null);
   mainWindow = new BrowserWindow({
     show: false,
     width: 400,
@@ -66,7 +66,6 @@ const createWindow = async () => {
     }
   });
 
-  mainWindow.setMenuBarVisibility(false);
   mainWindow.loadURL(`file://${__dirname}/app.html`);
 
   // @TODO: Use 'ready-to-show' event

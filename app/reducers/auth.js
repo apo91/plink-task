@@ -1,6 +1,7 @@
 // @flow
 import * as actions from '../actions/auth';
 import type { Action } from './types';
+import endpoints from '../endpoints';
 
 export type AuthStatus =
   | 'WAITING_FOR_SLUG'
@@ -34,7 +35,8 @@ export default function auth(state: AuthState = defaultState, action: Action) {
     case actions.QR_CONFIRMATION_START:
       return {
         ...state,
-        authStatus: 'WAITING_FOR_CONFIRMATION'
+        authStatus: 'WAITING_FOR_CONFIRMATION',
+        qrConfirmationCountdown: endpoints.auth.qrConfirmationTimeout
       };
     case actions.QR_CONFIRMATION_TICK:
       return {

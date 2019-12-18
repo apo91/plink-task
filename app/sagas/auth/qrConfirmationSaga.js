@@ -37,7 +37,7 @@ export default function* qrConfirmationSaga() {
         onError: handleConfirmationWebSocketError
       }
     );
-    const confirmationCountdownChannel = yield call(countdownChannel, 60);
+    const confirmationCountdownChannel = yield call(countdownChannel, endpoints.auth.qrConfirmationTimeout);
     yield put(actions.qrConfirmationStart());
     try {
       while (true) {
