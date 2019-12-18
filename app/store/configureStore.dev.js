@@ -7,7 +7,9 @@ import { createLogger } from 'redux-logger';
 import createRootReducer from '../reducers';
 import * as counterActions from '../actions/counter';
 import type { counterStateType } from '../reducers/types';
-import { qrRequestSaga, qrConfirmationSaga, authSaga } from '../sagas/auth';
+import qrRequestSaga from '../sagas/auth/qrRequestSaga';
+import qrConfirmationSaga from '../sagas/auth/qrConfirmationSaga';
+import authSaga from '../sagas/auth/authSaga';
 
 const history = createHashHistory();
 

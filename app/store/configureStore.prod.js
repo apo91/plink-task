@@ -6,7 +6,9 @@ import { createHashHistory } from 'history';
 import { routerMiddleware } from 'connected-react-router';
 import createRootReducer from '../reducers';
 import type { counterStateType } from '../reducers/types';
-import { qrRequestSaga, qrConfirmationSaga, authSaga } from '../sagas/auth';
+import qrRequestSaga from '../sagas/auth/qrRequestSaga';
+import qrConfirmationSaga from '../sagas/auth/qrConfirmationSaga';
+import authSaga from '../sagas/auth/authSaga';
 
 const history = createHashHistory();
 const router = routerMiddleware(history);
