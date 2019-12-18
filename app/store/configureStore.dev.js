@@ -1,11 +1,13 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 import { createHashHistory } from 'history';
 import { routerMiddleware, routerActions } from 'connected-react-router';
 import { createLogger } from 'redux-logger';
 import createRootReducer from '../reducers';
 import * as counterActions from '../actions/counter';
 import type { counterStateType } from '../reducers/types';
+import { qrRequestSaga, qrConfirmationSaga, authSaga } from '../sagas/auth';
 
 const history = createHashHistory();
 
@@ -34,6 +36,10 @@ const configureStore = (initialState?: counterStateType) => {
   const router = routerMiddleware(history);
   middleware.push(router);
 
+  // Saga Middleware
+  const sagaMiddleware = createSagaMiddleware();
+  middleware.push(sagaMiddleware);
+
   // Redux DevTools Configuration
   const actionCreators = {
     ...counterActions,
@@ -55,6 +61,11 @@ const configureStore = (initialState?: counterStateType) => {
 
   // Create Store
   const store = createStore(rootReducer, initialState, enhancer);
+
+  // Run sagas
+  sagaMiddleware.run(qrRequestSaga);
+  sagaMiddleware.run(qrConfirmationSaga);
+  sagaMiddleware.run(authSaga);
 
   if (module.hot) {
     module.hot.accept(

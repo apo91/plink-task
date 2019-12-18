@@ -1,5 +1,10 @@
 import type { Dispatch as ReduxDispatch, Store as ReduxStore } from 'redux';
 
+export type AuthState = {
+  slug: string,
+  slugTTL: number
+};
+
 export type counterStateType = {
   +counter: number
 };

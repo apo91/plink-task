@@ -1,55 +1,35 @@
 // @flow
-import React, { Component } from 'react';
+import React from 'react';
 import QRCode from 'qrcode.react';
 // import { Link } from 'react-router-dom';
-// import _ from '../../resources/4k-gaming-wallpaper-.png';
 import styles from './Auth.css';
 // import routes from '../constants/routes.json';
 
 type Props = {
-  // increment: () => void,
-  // incrementIfOdd: () => void,
-  // incrementAsync: () => void,
-  // decrement: () => void,
-  // counter: number
+  qrSlug: string,
+  qrConfirmationCountdown: number
 };
 
-export default class Auth extends Component<Props> {
-  props: Props;
-
-  render() {
-    // const {
-    //   increment,
-    //   incrementIfOdd,
-    //   incrementAsync,
-    //   decrement,
-    //   counter
-    // } = this.props;
-    return (
-      <div className={styles.container}>
-        <div className={styles.spacer1} />
-        <Logo />
-        <div className={styles.spacer1} />
-        <h2>Приветствуем, Plinker!</h2>
-        <p>Отсканируйте QR-код через мобильное приложение</p>
-        <div className={styles.spacer1} />
-        <div className={styles.qrContainer}>
-          <QRCode
-            value="http://facebook.github.io/react/"
-            renderAs="canvas"
-            size={140}
-          />
-        </div>
-        <div className={styles.spacer1} />
-        <a href="#">Как присоединить новое устройство?</a>
-        <div className={styles.spacer2} />
-        <div>Не можете отсканировать код?</div>
-        <a href="#">Попробуйте другой способ</a>
-        <div className={styles.spacer1} />
-      </div>
-    );
-  }
-}
+export default ({ qrSlug, qrConfirmationCountdown }: Props) => (
+  <div className={styles.container}>
+    <div className={styles.spacer1} />
+    <Logo />
+    <div className={styles.spacer1} />
+    <h2>Приветствуем, Plinker!</h2>
+    <p>Отсканируйте QR-код через мобильное приложение</p>
+    <div className={styles.spacer1} />
+    <div className={styles.qrContainer}>
+      {qrSlug && <QRCode value={qrSlug} renderAs="canvas" size={140} />}
+    </div>
+    <p>Обновление через {qrConfirmationCountdown}</p>
+    <div className={styles.spacer1} />
+    <a href="#">Как присоединить новое устройство?</a>
+    <div className={styles.spacer2} />
+    <div>Не можете отсканировать код?</div>
+    <a href="#">Попробуйте другой способ</a>
+    <div className={styles.spacer1} />
+  </div>
+);
 
 function Logo() {
   return (
