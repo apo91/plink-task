@@ -1,35 +1,52 @@
+/* eslint-disable react/no-unused-prop-types */
 // @flow
 import React from 'react';
 import QRCode from 'qrcode.react';
-// import { Link } from 'react-router-dom';
 import styles from './Auth.css';
-// import routes from '../constants/routes.json';
+import type { AuthStatus } from '../reducers/auth';
 
 type Props = {
+  authStatus: AuthStatus,
   qrSlug: string,
   qrConfirmationCountdown: number
 };
 
-export default ({ qrSlug, qrConfirmationCountdown }: Props) => (
-  <div className={styles.container}>
-    <div className={styles.spacer1} />
-    <Logo />
-    <div className={styles.spacer1} />
-    <h2>Приветствуем, Plinker!</h2>
-    <p>Отсканируйте QR-код через мобильное приложение</p>
-    <div className={styles.spacer1} />
-    <div className={styles.qrContainer}>
-      {qrSlug && <QRCode value={qrSlug} renderAs="canvas" size={140} />}
+export default function Auth(props: Props) {
+  const { qrSlug } = props;
+  return (
+    <div className={styles.container}>
+      <div className={styles.spacer1} />
+      <Logo />
+      <div className={styles.spacer1} />
+      <h2>Приветствуем, Plinker!</h2>
+      <p>Отсканируйте QR-код через мобильное приложение</p>
+      <div className={styles.spacer1} />
+      <div className={styles.qrContainer}>
+        {qrSlug && <QRCode value={qrSlug} renderAs="canvas" size={140} />}
+      </div>
+      {renderAuthStatus(props)}
+      <div className={styles.spacer1} />
+      <a href="#">Как присоединить новое устройство?</a>
+      <div className={styles.spacer2} />
+      <div>Не можете отсканировать код?</div>
+      <a href="#">Попробуйте другой способ</a>
+      <div className={styles.spacer1} />
     </div>
-    <p>Обновление через {qrConfirmationCountdown}</p>
-    <div className={styles.spacer1} />
-    <a href="#">Как присоединить новое устройство?</a>
-    <div className={styles.spacer2} />
-    <div>Не можете отсканировать код?</div>
-    <a href="#">Попробуйте другой способ</a>
-    <div className={styles.spacer1} />
-  </div>
-);
+  );
+}
+
+function renderAuthStatus(props: Props) {
+  switch (props.authStatus) {
+    case 'WAITING_FOR_SLUG':
+      return <p>Обновление...</p>;
+    case 'WAITING_FOR_CONFIRMATION':
+      return <p>Обновление через {props.qrConfirmationCountdown}</p>;
+    case 'AUTHENTICATED':
+      return <p>Успех!</p>;
+    default:
+      return null;
+  }
+}
 
 function Logo() {
   return (

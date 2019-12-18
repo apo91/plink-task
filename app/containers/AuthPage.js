@@ -6,6 +6,7 @@ import { AuthState } from '../reducers/auth';
 
 function mapStateToProps(state: AuthState) {
   return {
+    authStatus: state.auth.authStatus,
     qrSlug: state.auth.qrSlug,
     qrConfirmationCountdown: state.auth.qrConfirmationCountdown
   };
