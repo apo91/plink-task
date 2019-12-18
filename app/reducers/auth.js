@@ -1,9 +1,14 @@
 // @flow
 import * as actions from '../actions/auth';
-import type { AuthState, Action } from './types';
+import type { Action } from './types';
+
+export type AuthState = {
+  qrSlug?: string,
+  qrConfirmationCountdown: number
+};
 
 const defaultState: AuthState = {
-  qrSlug: null,
+  qrSlug: undefined,
   qrConfirmationCountdown: 0
 };
 
