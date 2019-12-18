@@ -56,10 +56,10 @@ const createWindow = async () => {
   Menu.setApplicationMenu(null);
   mainWindow = new BrowserWindow({
     show: false,
-    width: 400,
-    height: 720,
-    minWidth: 400,
-    minHeight: 400,
+    width: 400 + 16,
+    height: 720 + 39,
+    minWidth: 400 + 16,
+    minHeight: 400 + 39,
     resizable: true,
     webPreferences: {
       nodeIntegration: true
