@@ -10,7 +10,6 @@ export default function countdownChannel(seconds: number) {
       emitter(remaining);
     }, 1000);
     return () => {
-      console.log('clearing interval');
       clearInterval(interval);
     };
   });

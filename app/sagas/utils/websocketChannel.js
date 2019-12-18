@@ -16,7 +16,6 @@ export default function websocketChannel(
       options.onEvent(emitter, event);
     };
     return () => {
-      console.log('closing websocket');
       ws.close();
     };
   });
